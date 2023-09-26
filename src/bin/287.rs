@@ -4,13 +4,14 @@ fn main() {
         vec![3, 1, 3, 4, 2],
         vec![2, 2, 2, 2, 2],
         vec![1, 1, 2],
-        vec![8,7,1,10,17,15,18,11,16,9,19,12,5,14,3,4,2,13,18,18],
+        vec![
+            8, 7, 1, 10, 17, 15, 18, 11, 16, 9, 19, 12, 5, 14, 3, 4, 2, 13, 18, 18,
+        ],
     ];
     let answers = [2, 3, 2, 1, 18];
-    for i in 0..tests.len() {
-        let answer = Solution :: find_duplicate(tests[i].to_vec());
-        println!("{}", answer);
-        assert_eq!(answer, answers[i]);
+    for (test, expected_answer) in tests.into_iter().zip(answers) {
+        let answer = Solution::find_duplicate(test);
+        assert_eq!(answer, expected_answer);
     }
 }
 struct Solution;

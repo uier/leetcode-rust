@@ -1,4 +1,4 @@
-# CMD
+# Run
 ```
-cargo run --bin <file>
+cargo run --bin <problem_id>
 ```
