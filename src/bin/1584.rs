@@ -11,7 +11,7 @@ fn main() {
 }
 struct Solution;
 impl Solution {
-    pub fn get_dist(x: &Vec<i32>, y: &Vec<i32>) -> i32 {
+    pub fn get_dist(x: &[i32], y: &[i32]) -> i32 {
         (x[0] - y[0]).abs() + (x[1] - y[1]).abs()
     }
     pub fn find(parent: &mut Vec<usize>, x: usize) -> usize {

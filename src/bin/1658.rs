@@ -35,10 +35,9 @@ impl Solution {
         // println!("{prefix:?}");
         // println!("{suffix:?}");
         let mut ans = NO_SOLUTION;
-        for i in 0..prefix.len() {
-            match suffix.binary_search(&(x as i64 - prefix[i])) {
-                Ok(j) => ans = min(ans, (i + j) as i32),
-                _ => {}
+        for (i, prefix_i) in prefix.iter().enumerate() {
+            if let Ok(j) = suffix.binary_search(&(x as i64 - prefix_i)) {
+                ans = min(ans, (i + j) as i32)
             }
         }
         if ans == NO_SOLUTION {

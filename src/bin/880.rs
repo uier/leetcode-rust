@@ -48,7 +48,7 @@ impl Solution {
                 segment.push(*c as char);
             }
         }
-        if segment.len() > 0 {
+        if !segment.is_empty() {
             total_len += segment.len() as i64;
             segments.push((segment, 1));
         }

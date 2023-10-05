@@ -46,56 +46,61 @@ impl Solution {
         }
         let mid1 = (l1 + r1) / 2;
         let mid2 = (l2 + r2) / 2;
-        let smaller_element_cnt = (mid1 - l1 + mid2 - l2 + 2) as i32;
-        if k < smaller_element_cnt {
-            return if nums1[mid1 as usize] <= nums2[mid2 as usize] {
-                Solution::find_kth_smallest_element(nums1, nums2, l1, r1, l2, mid2 - 1, k)
-            } else {
-                Solution::find_kth_smallest_element(nums1, nums2, l1, mid1 - 1, l2, r2, k)
-            };
-        } else if k > smaller_element_cnt {
-            return if nums1[mid1 as usize] <= nums2[mid2 as usize] {
-                Solution::find_kth_smallest_element(
-                    nums1,
-                    nums2,
-                    mid1 + 1,
-                    r1,
-                    l2,
-                    r2,
-                    k - ((mid1 - l1) as i32 + 1),
-                )
-            } else {
+        let smaller_element_cnt = mid1 - l1 + mid2 - l2 + 2;
+        match k.cmp(&smaller_element_cnt) {
+            std::cmp::Ordering::Less => {
+                if nums1[mid1 as usize] <= nums2[mid2 as usize] {
+                    Solution::find_kth_smallest_element(nums1, nums2, l1, r1, l2, mid2 - 1, k)
+                } else {
+                    Solution::find_kth_smallest_element(nums1, nums2, l1, mid1 - 1, l2, r2, k)
+                }
+            }
+            std::cmp::Ordering::Greater => {
+                if nums1[mid1 as usize] <= nums2[mid2 as usize] {
+                    Solution::find_kth_smallest_element(
+                        nums1,
+                        nums2,
+                        mid1 + 1,
+                        r1,
+                        l2,
+                        r2,
+                        k - ((mid1 - l1) + 1),
+                    )
+                } else {
+                    Solution::find_kth_smallest_element(
+                        nums1,
+                        nums2,
+                        l1,
+                        r1,
+                        mid2 + 1,
+                        r2,
+                        k - ((mid2 - l2) + 1),
+                    )
+                }
+            }
+            std::cmp::Ordering::Equal => {
+                if nums1[mid1 as usize] <= nums2[mid2 as usize] {
+                    return Solution::find_kth_smallest_element(
+                        nums1,
+                        nums2,
+                        mid1 + 1,
+                        r1,
+                        l2,
+                        mid2,
+                        k - ((mid1 - l1) + 1),
+                    );
+                }
                 Solution::find_kth_smallest_element(
                     nums1,
                     nums2,
                     l1,
-                    r1,
+                    mid1,
                     mid2 + 1,
                     r2,
-                    k - ((mid2 - l2) as i32 + 1),
+                    k - ((mid2 - l2) + 1),
                 )
-            };
+            }
         }
-        if nums1[mid1 as usize] <= nums2[mid2 as usize] {
-            return Solution::find_kth_smallest_element(
-                nums1,
-                nums2,
-                mid1 + 1,
-                r1,
-                l2,
-                mid2,
-                k - ((mid1 - l1) as i32 + 1),
-            );
-        }
-        Solution::find_kth_smallest_element(
-            nums1,
-            nums2,
-            l1,
-            mid1,
-            mid2 + 1,
-            r2,
-            k - ((mid2 - l2) as i32 + 1),
-        )
     }
     pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
         let total_len = nums1.len() + nums2.len();

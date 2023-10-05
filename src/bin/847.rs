@@ -16,18 +16,15 @@ impl Solution {
     pub fn shortest_path_length(graph: Vec<Vec<i32>>) -> i32 {
         let n = graph.len();
         let mut dp = vec![vec![i32::MAX; 1 << n]; n];
-        for i in 0..n {
+        for (i, dp_i) in dp.iter_mut().enumerate().take(n) {
             let mut queue = VecDeque::from([i as i32]);
-            dp[i][1 << i] = 0;
-            // for v in &graph[i] {
-            //     dp[i][1<<i | 1 << v] = 1;
-            // }
+            dp_i[1 << i] = 0;
             while let Some(u) = queue.pop_front() {
                 for v in &graph[u as usize] {
-                    if dp[i][1 << v | 1 << i] != i32::MAX || *v == i as i32 {
+                    if dp_i[1 << v | 1 << i] != i32::MAX || *v == i as i32 {
                         continue;
                     }
-                    dp[i][1 << v | 1 << i] = dp[i][1 << u | 1 << i] + 1;
+                    dp_i[1 << v | 1 << i] = dp_i[1 << u | 1 << i] + 1;
                     queue.push_back(*v);
                 }
             }

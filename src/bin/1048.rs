@@ -33,7 +33,7 @@ impl Solution {
                 if words[j].len() != words[i].len() - 1 {
                     continue;
                 }
-                if Self::is_predecessor(&words[j].as_bytes(), &words[i].as_bytes()) {
+                if Self::is_predecessor(words[j].as_bytes(), words[i].as_bytes()) {
                     dp[i] = std::cmp::max(dp[i], dp[j] + 1);
                 }
             }

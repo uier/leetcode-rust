@@ -18,7 +18,7 @@ impl Solution {
                 r += 1;
             }
             if r - l >= 3 {
-                if colors[l] == 'A' as u8 {
+                if colors[l] == b'A' {
                     turns.0 += r - l - 2;
                 } else {
                     turns.1 += r - l - 2;

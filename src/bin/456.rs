@@ -38,7 +38,7 @@ impl SegTree {
             self.seg[d] = v;
             return;
         }
-        let mid = l + r >> 1;
+        let mid = (l + r) >> 1;
         self.update(l, mid, d << 1, x, v);
         self.update(mid + 1, r, d << 1 | 1, x, v);
         self.seg[d] = self.seg[d << 1].min(self.seg[d << 1 | 1]);
@@ -50,7 +50,7 @@ impl SegTree {
         if ql <= l && r <= qr {
             return self.seg[d];
         }
-        let mid = l + r >> 1;
+        let mid = (l + r) >> 1;
         self.query(l, mid, d << 1, ql, qr)
             .min(self.query(mid + 1, r, d << 1 | 1, ql, qr))
     }

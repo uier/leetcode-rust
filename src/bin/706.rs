@@ -29,13 +29,18 @@ fn main() {
         assert_eq!(test.0.len(), expected_answer.len());
         assert_eq!(test.1.len(), expected_answer.len());
         let mut obj = MyHashMap::new();
-        for i in 1..test.0.len() {
+        for (i, &ea_i) in expected_answer
+            .iter()
+            .enumerate()
+            .take(test.0.len())
+            .skip(1)
+        {
             match test.0[i] {
                 "put" => {
                     obj.put(test.1[i][0], test.1[i][1]);
                 }
                 "get" => {
-                    assert_eq!(obj.get(test.1[i][0]), expected_answer[i]);
+                    assert_eq!(obj.get(test.1[i][0]), ea_i);
                 }
                 "remove" => {
                     obj.remove(test.1[i][0]);

@@ -16,7 +16,7 @@ impl Solution {
         let mut ans = n;
         for i in (0..n).rev() {
             set.remove(&s[i]);
-            if set.len() == 0 && backup.contains(&s[i]) && (ans == n || s[i] <= s[ans]) {
+            if set.is_empty() && backup.contains(&s[i]) && (ans == n || s[i] <= s[ans]) {
                 ans = i;
             }
         }
@@ -29,7 +29,7 @@ impl Solution {
         let mut l = 0;
         for _ in 0..char_set.len() {
             l += Self::min_begin_cover_all_char(&s.as_bytes()[l..n], char_set.clone());
-            char_set.remove(&s.bytes().nth(l).unwrap());
+            char_set.remove(&s.as_bytes()[l]);
             ans.push(s.chars().nth(l).unwrap());
             l += 1;
         }
