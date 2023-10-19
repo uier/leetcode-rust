@@ -28,7 +28,7 @@ impl Solution {
             let pre = cur ^ 1;
             for j in 0..arr_len as usize {
                 dp[cur][j] = dp[pre][j];
-                if j as i32 - 1 >= 0 {
+                if j as i32 > 0 {
                     dp[cur][j] = (dp[cur][j] + dp[pre][j - 1]) % MOD;
                 }
                 if j as i32 + 1 < arr_len {

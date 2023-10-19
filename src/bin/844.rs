@@ -19,7 +19,7 @@ impl<T: Iterator<Item = char>> Iterator for MyIter<T> {
     type Item = char;
     fn next(&mut self) -> Option<Self::Item> {
         let mut skip = 0;
-        while let Some(c) = self.s.next() {
+        for c in self.s.by_ref() {
             if c == '#' {
                 skip += 1;
             } else if skip > 0 {

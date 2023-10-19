@@ -76,7 +76,7 @@ impl Solution {
                     usize::MAX
                 };
             }
-            let m = l + r >> 1;
+            let m = (l + r) >> 1;
             match arr.get(m as i32).cmp(&target) {
                 std::cmp::Ordering::Less => {
                     if decr {
@@ -103,12 +103,12 @@ impl Solution {
         let index = Self::find_peak_index(n, arr);
         let li = Self::binary_search(0, index, target, arr, false);
         let ri = Self::binary_search(index, (n - 1) as usize, target, arr, true);
-        return if li != usize::MAX {
+        if li != usize::MAX {
             li as i32
         } else if ri != usize::MAX {
             ri as i32
         } else {
             -1
-        };
+        }
     }
 }

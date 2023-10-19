@@ -23,16 +23,14 @@ impl Solution {
                 cnt.0 += 1;
             } else if n_i == major.1 {
                 cnt.1 += 1;
+            } else if cnt.0 == 0 {
+                major.0 = n_i;
+                cnt.0 = 1
+            } else if cnt.1 == 0 {
+                major.1 = n_i;
+                cnt.1 = 1;
             } else {
-                if cnt.0 == 0 {
-                    major.0 = n_i;
-                    cnt.0 = 1
-                } else if cnt.1 == 0 {
-                    major.1 = n_i;
-                    cnt.1 = 1;
-                } else {
-                    cnt = (cnt.0 - 1, cnt.1 - 1);
-                }
+                cnt = (cnt.0 - 1, cnt.1 - 1);
             }
         }
         vec![major.0, major.1]

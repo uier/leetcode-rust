@@ -27,7 +27,7 @@ fn main() {
 struct Solution;
 impl Solution {
     pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
-        if nums.len() == 0 || target < *nums.first().unwrap() || target > *nums.last().unwrap() {
+        if nums.is_empty() || target < *nums.first().unwrap() || target > *nums.last().unwrap() {
             return vec![-1, -1];
         }
         let l = nums
@@ -35,7 +35,7 @@ impl Solution {
                 std::cmp::Ordering::Equal => std::cmp::Ordering::Greater,
                 ord => ord,
             })
-            .or_else(|i| Ok::<usize, usize>(i))
+            .or_else(Ok::<usize, usize>)
             .unwrap();
         if nums[l] != target {
             vec![-1, -1]
@@ -46,7 +46,7 @@ impl Solution {
                     std::cmp::Ordering::Equal => std::cmp::Ordering::Greater,
                     ord => ord,
                 })
-                .or_else(|i| Ok::<usize, usize>(i))
+                .or_else(Ok::<usize, usize>)
                 .unwrap() as i32
                     - 1,
             ]

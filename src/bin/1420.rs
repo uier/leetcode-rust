@@ -19,7 +19,7 @@ impl Solution {
                 for l in 1..=(k as usize) {
                     dp[i][j][l] += (j as i64) * dp[i - 1][j][l];
                     dp[i][j][l] %= MOD;
-                    for p in 1..(j as usize) {
+                    for p in 1..j {
                         dp[i][j][l] += dp[i - 1][p][l - 1];
                         dp[i][j][l] %= MOD;
                     }

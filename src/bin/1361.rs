@@ -15,7 +15,7 @@ fn main() {
 }
 struct Solution;
 impl Solution {
-    fn identify_parents(parent: &mut Vec<i32>, child: &Vec<i32>) -> bool {
+    fn identify_parents(parent: &mut [i32], child: &[i32]) -> bool {
         for (i, &c) in child.iter().enumerate() {
             if c != -1 {
                 if parent[c as usize] != -1 && parent[c as usize] != i as i32 {

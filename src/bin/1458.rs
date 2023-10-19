@@ -21,16 +21,15 @@ impl Solution {
         let m = nums2.len();
         let mut dp = vec![vec![0; m]; n];
         dp[0][0] = nums1[0] * nums2[0];
-        for i in 1..n {
-            dp[i][0] = dp[i - 1][0].max(nums1[i] * nums2[0]);
+        for (i, ni) in nums1.iter().enumerate().skip(1) {
+            dp[i][0] = dp[i - 1][0].max(ni * nums2[0]);
         }
-        for j in 1..m {
-            dp[0][j] = dp[0][j - 1].max(nums1[0] * nums2[j]);
+        for (i, ni) in nums2.iter().enumerate().skip(1) {
+            dp[0][i] = dp[0][i - 1].max(nums1[0] * ni);
         }
-        for i in 1..n {
-            for j in 1..m {
-                dp[i][j] = dp[i][j - 1]
-                    .max(dp[i - 1][j].max(dp[i - 1][j - 1].max(0) + nums1[i] * nums2[j]));
+        for (i, n1) in nums1.iter().enumerate().skip(1) {
+            for (j, n2) in nums2.iter().enumerate().skip(1) {
+                dp[i][j] = dp[i][j - 1].max(dp[i - 1][j].max(dp[i - 1][j - 1].max(0) + n1 * n2));
             }
         }
         dp[n - 1][m - 1]
